@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/semantic.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="description" content="{{ description }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta property="og:site_name" content="ImageBoards.net">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static',filename='js/semantic.min.js') }}"></script>
+</head>
+
+<body>
+    <div id="page-container">
+        <div id="content-wrap">
+            <div class="ui equal width centered menu borderless fixed inverted navbar">
+                <a class="item" href='/'>
+                    <img src="{{ url_for('static', filename='favicon.ico') }}"
+                        style="margin-right: 13px; height: 16px; width: 16px;" alt="website logo">
+                    ImageBoards.net
+                </a>
+
+                <a class="item" href='/'>
+                    <i class="teal rss icon inverted"></i>
+                    Blog
+                </a>
+
+                {% if categories %}
+                <div class="ui dropdown item inverted">
+                    <i class="teal tags icon inverted"></i>
+                    Categories
+                    <i class="dropdown icon"></i>
+                    <div class="menu inverted">
+                        {% for category in categories %}
+                        <a href="{{ url_for('blog_category', category=category) }}" 
+                           class="inverted item {% if current_category == category %}active{% endif %}">
+                            {{ category }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+            {{ content |safe }}
+        </div>
+        <div class="ui footer segment center inverted">
+            <div class="ui container">
+                <div class='centered'>
+                    <h4 class="ui ">ImageBoards.net | 2025 | <a href="https://github.com/imageboardsnet/Leaf">Leaf 1.0</a></h4>
+                </div>
+            </div>
+        </div>
+     </div>   
+     <script>
+        $(document).ready(function() {
+            $('.ui.dropdown').dropdown();
+        });
+    </script>
+</body>
+</html>

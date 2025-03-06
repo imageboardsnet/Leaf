@@ -1,0 +1,37 @@
+<div class="ui main container">
+    <div class="ui inverted segment article_box">
+        <a href="/" class="ui secondary teal inverted icon button">
+            <i class="arrow left icon"></i>
+            Back to Blog
+        </a>
+        <article>
+            <header>
+                <div class="meta" style="margin: 2em 0 1em;">
+                    <div class="ui inverted horizontal list">
+                        <div class="item">
+                            <i class="calendar icon"></i>
+                            <span class="date">{{ article.date }}</span>
+                        </div>
+                        {% for category in article.categories %}
+                        <div class="item">
+                            <a href="{{ url_for('blog_category', category=category) }}" class="ui inverted basic label">
+                                {{ category }}
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <h1 class="ui inverted header">{{ article.title }}</h1>
+                {% if article.has_image %}
+                <div class="ui rounded image" style="margin: 2em 0;">
+                    <img src="{{ article.image_url }}" alt="Article image for {{ article.title }}" style="max-width: 100%; height: auto;">
+                </div>
+                {% endif %}
+            </header>
+            <div class="ui inverted divider"></div>
+            <div class="content ui inverted text">
+                {{ article.content | nl2br | safe }}
+            </div>
+        </article>
+    </div>
+</div> 

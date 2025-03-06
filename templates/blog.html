@@ -1,0 +1,67 @@
+{% if categories %}
+<div class="ui main container">
+
+    {% if articles %}
+    {% for article in articles %}
+    <div class="ui inverted raised segment article_box">
+        <div class="meta" style="margin-bottom: 1em;">
+            <div class="ui two column grid">
+                <div class="left aligned column">
+                    <div class="ui inverted horizontal list">
+                        <div class="item">
+                            <i class="calendar icon"></i>
+                            <span class="date">{{ article.date }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="right aligned column">
+                    <div class="ui inverted horizontal list">
+                        {% for category in article.categories %}
+                        <div class="item">
+                            <a href="{{ url_for('blog_category', category=category) }}" class="ui inverted tiny basic label">
+                                {{ category }}
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui rounded image" style="height: 200px; overflow: hidden; position: relative; margin-bottom: 1.5em;">
+            {% if article.has_image %}
+            <img src="{{ article.image_url }}" alt="Article image for {{ article.title }}" 
+                 style="width: 100%; object-fit: cover; object-position: center center; filter: brightness(0.7);">
+            {% endif %}
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 1em; 
+                        background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+                <a class="header" href="{{ url_for('article', article_id=article.id) }}">
+                    <h2 class="ui inverted header" style="margin: 0;">{{ article.title }}</h2>
+                </a>
+            </div>
+        </div>
+        <div class="ui inverted items">
+            <div class="item">
+                <div class="content">
+                    <div class="description" style="margin: 1em 0;">
+                        <p class="ui inverted text"><em>{{ article.description }}</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="ui inverted segment">
+        <h2 class="ui inverted header">No articles found</h2>
+        <p class="ui inverted text">No articles found in this category. Check back later for new content!</p>
+    </div>
+    {% endif %}
+</div>
+{% else %}
+<div class="ui main container" style="margin-top: 6em;">
+    <div class="ui inverted segment">
+        <h2 class="ui inverted header">No categories found</h2>
+        <p class="ui inverted text">Check back later for new content!</p>
+    </div>
+</div>
+{% endif %}
