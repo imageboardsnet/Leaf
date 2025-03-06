@@ -1,6 +1,6 @@
 # 🍀 Leaf
 
-This is a dead simple blogging software.
+A dead simple blogging software.
 
 ## Installation instruction
 
