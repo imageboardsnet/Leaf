@@ -1,6 +1,0 @@
-[date:06/03/2025]
-[title:How I built imageboards.net macro services]
-[categories: Tech]
-[description:a super blog post about macroservices]
-
-a super blog post about macroservices and what not 
